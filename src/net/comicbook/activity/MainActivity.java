@@ -8,6 +8,7 @@ import net.comicbook.R;
 import net.comicbook.adapter.NewsFragmentPagerAdapter;
 import net.comicbook.bean.ChannelItem;
 import net.comicbook.bean.ChannelManage;
+import net.comicbook.fragment.JDFragment_;
 import net.comicbook.fragment.NewsFragment_;
 import net.comicbook.initview.SlidingMenuView;
 import net.comicbook.utils.BaseTools;
@@ -22,6 +23,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import cn.bmob.v3.Bmob;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -101,6 +103,9 @@ public class MainActivity extends BaseActivity {
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 //        UmengUpdateAgent.update(this);
 //        MobclickAgent.updateOnlineConfig(this);
+        
+        Bmob.initialize(this, "9e441b998f89368cc102c01306fa92ae");
+        
         mScreenWidth = BaseTools.getWindowsWidth(this);
         mItemWidth = mScreenWidth / 7;// 一个Item宽度为屏幕的1/7
         userChannelLists = new ArrayList<ChannelItem>();
@@ -238,11 +243,11 @@ public class MainActivity extends BaseActivity {
 
     public Fragment initFragment(String channelName) {
         if (channelName.equals("头条")) {
-            newfragment = new NewsFragment_();
+            newfragment = new JDFragment_();
         } else if (channelName.equals("足球")) {
 //            newfragment = new FoodBallFragment_();
         	newfragment = new NewsFragment_();
-        } else if (channelName.equals("娱乐")) {
+        }/* else if (channelName.equals("娱乐")) {
 //            newfragment = new YuLeFragment_();
         	newfragment = new NewsFragment_();
         } else if (channelName.equals("体育")) {
@@ -257,7 +262,7 @@ public class MainActivity extends BaseActivity {
         } else if (channelName.equals("电影")) {
 //            newfragment = new DianYingFragment_();
         	newfragment = new NewsFragment_();
-        } /*else if (channelName.equals("汽车")) {
+        }*/ /*else if (channelName.equals("汽车")) {
             newfragment = new QiCheFragment_();
         } else if (channelName.equals("笑话")) {
             newfragment = new XiaoHuaFragment_();

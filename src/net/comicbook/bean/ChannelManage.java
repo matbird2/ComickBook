@@ -29,7 +29,7 @@ public class ChannelManage {
         defaultOtherChannels = new ArrayList<ChannelItem>();
         defaultUserChannels.add(new ChannelItem(1, "头条", 1, 1));
         defaultUserChannels.add(new ChannelItem(2, "足球", 2, 1));
-        defaultUserChannels.add(new ChannelItem(3, "娱乐", 3, 1));
+        /*defaultUserChannels.add(new ChannelItem(3, "娱乐", 3, 1));
         defaultUserChannels.add(new ChannelItem(4, "体育", 4, 1));
         defaultUserChannels.add(new ChannelItem(5, "财经", 5, 1));
         defaultUserChannels.add(new ChannelItem(6, "科技", 6, 1));
@@ -58,7 +58,7 @@ public class ChannelManage {
         defaultOtherChannels.add(new ChannelItem(28, "社会", 22, 0));
         defaultOtherChannels.add(new ChannelItem(29, "家居", 23, 0));
         defaultOtherChannels.add(new ChannelItem(30, "暴雪", 24, 0));
-        defaultUserChannels.add(new ChannelItem(31, "亲子", 25, 0));
+        defaultUserChannels.add(new ChannelItem(31, "亲子", 25, 0));*/
     }
 
     private ChannelManage(SQLHelper paramDBHelper) throws SQLException {
