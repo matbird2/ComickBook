@@ -6,22 +6,16 @@ import java.util.List;
 
 import net.comicbook.R;
 import net.comicbook.activity.BaseActivity;
+import net.comicbook.activity.WatchComickActivity_;
 import net.comicbook.adapter.CBAdapter;
 import net.comicbook.adapter.CardsAnimationAdapter;
-import net.comicbook.adapter.NewAdapter;
 import net.comicbook.bean.NewModle;
 import net.comicbook.bean.bmob.Album;
-import net.comicbook.http.HttpUtil;
-import net.comicbook.http.Url;
-import net.comicbook.http.json.NewListJson;
 import net.comicbook.initview.InitView;
 import net.comicbook.utils.LogUtils;
 import net.comicbook.utils.StringUtils;
 import net.comicbook.wedget.swiptlistview.SwipeListView;
-import net.comicbook.wedget.viewimage.Animations.DescriptionAnimation;
-import net.comicbook.wedget.viewimage.Animations.SliderLayout;
 import net.comicbook.wedget.viewimage.SliderTypes.BaseSliderView;
-import net.comicbook.wedget.viewimage.SliderTypes.TextSliderView;
 import net.comicbook.wedget.viewimage.SliderTypes.BaseSliderView.OnSliderClickListener;
 
 import org.androidannotations.annotations.AfterInject;
@@ -34,20 +28,18 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
 
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.FindCallback;
-import cn.bmob.v3.listener.FindListener;
-
-import com.alibaba.fastjson.JSON;
-import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
-
 import android.app.Activity;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindCallback;
+
+import com.alibaba.fastjson.JSON;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
 
 @EFragment(R.layout.activity_main)
 public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,OnSliderClickListener {
@@ -84,6 +76,7 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         url_maps = new HashMap<String, String>();
 
         newHashMap = new HashMap<String, Album>();
+        
     }
 
     @AfterViews
@@ -116,8 +109,9 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             mListView.onBottomComplete();
             mProgressBar.setVisibility(View.GONE);
             getMyActivity().showShortToast(getString(R.string.not_network));
-            String result = getMyActivity().getCacheStr("NewsFragment" + currentPagte);
+            String result = getMyActivity().getCacheStr("JDFragment" + currentPagte);
             if (!StringUtils.isEmpty(result)) {
+            	LogUtils.i("test", "cache result:"+result);
                 getResult(result);
             }
         }
@@ -177,21 +171,16 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     @ItemClick(R.id.listview)
     protected void onItemClick(int position) {
-//        NewModle newModle = listsModles.get(position - 1);
-//        enterDetailActivity(newModle);
+        Album album = listsModles.get(position);
+        if(album != null && album.getImgs() != null && album.getImgs().size() > 0)
+        	enterDetailActivity(album);
     }
 
-    public void enterDetailActivity(NewModle newModle) {
-        /*Bundle bundle = new Bundle();
-        bundle.putSerializable("newModle", newModle);
-        Class<?> class1;
-        if (newModle.getImagesModle() != null && newModle.getImagesModle().getImgList().size() > 1) {
-            class1 = ImageDetailActivity_.class;
-        } else {
-            class1 = DetailsActivity_.class;
-        }
-        ((BaseActivity) getActivity()).openActivity(class1,
-                bundle, 0);*/
+    public void enterDetailActivity(Album album) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("album", album);
+        Class<?> class1 = WatchComickActivity_.class;
+        ((BaseActivity) getActivity()).openActivity(class1,bundle, 0);
     }
 
     @Background

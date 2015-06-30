@@ -31,6 +31,8 @@ public class SlidingActivity extends FragmentActivity {
     private int titleResId = -1;
     Bitmap bmp;
 
+	private SlidingLayout slideLayout;
+
     @SuppressLint("NewApi")
     @Override
     public void setContentView(int layoutResID) {
@@ -55,7 +57,7 @@ public class SlidingActivity extends FragmentActivity {
         layoutParams.setMargins(0, marginTop, 0, 0);
         contentView.addView(inflater.inflate(layoutResID, null), layoutParams);
 
-        SlidingLayout slideLayout = (SlidingLayout) findViewById(R.id.slide_layout);
+        slideLayout = (SlidingLayout) findViewById(R.id.slide_layout);
         slideLayout.setShadowResource(R.drawable.sliding_back_shadow);
         slideLayout.setSliderFadeColor(0x00000000);
         slideLayout.setPanelSlideListener(new SlidingLayout.SimpleSlideListener() {
@@ -143,5 +145,9 @@ public class SlidingActivity extends FragmentActivity {
     protected void setContentView(int layoutResID, boolean hideTitle) {
         this.hideTitle = hideTitle;
         setContentView(layoutResID);
+    }
+    
+    protected void setSlideable(boolean isSilde){
+    	slideLayout.setSlideable(isSilde);
     }
 }

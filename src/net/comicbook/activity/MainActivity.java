@@ -157,6 +157,7 @@ public class MainActivity extends BaseActivity {
     @Click(R.id.button_more_columns)
     protected void onMoreColumns(View view) {
 //        openActivityForResult(ChannelActivity_.class, CHANNELREQUEST);
+//    	openActivity(WatchComickActivity_.class);
     }
 
     /**
