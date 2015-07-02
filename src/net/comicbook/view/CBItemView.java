@@ -22,20 +22,20 @@ public class CBItemView extends CardView{
 	protected ImageView image;
 	@ViewById(R.id.cb_title)
 	protected TextView title;
+	@ViewById(R.id.cb_descri)
+	protected TextView descri;
 	
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
 	protected DisplayImageOptions options;
 	
-	private Context context;
-	
 	public CBItemView(Context context) {
 		super(context);
-		this.context = context;
 		options = Options.getListOptions();
 	}
 	
 	public void setCBItemView(Album album){
 		title.setText(album.getName());
+		descri.setText(album.getDescri());
 		imageLoader.displayImage(album.getCover(), image, options);
 	}
 }

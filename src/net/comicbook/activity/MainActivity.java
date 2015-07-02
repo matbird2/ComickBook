@@ -8,8 +8,18 @@ import net.comicbook.R;
 import net.comicbook.adapter.NewsFragmentPagerAdapter;
 import net.comicbook.bean.ChannelItem;
 import net.comicbook.bean.ChannelManage;
+import net.comicbook.fragment.ETFragment_;
+import net.comicbook.fragment.GMFragment_;
 import net.comicbook.fragment.JDFragment_;
-import net.comicbook.fragment.NewsFragment_;
+import net.comicbook.fragment.MJFragment_;
+import net.comicbook.fragment.PSFragment_;
+import net.comicbook.fragment.QTFragment_;
+import net.comicbook.fragment.RWFragment_;
+import net.comicbook.fragment.SHFragment_;
+import net.comicbook.fragment.WGFragment_;
+import net.comicbook.fragment.WXFragment_;
+import net.comicbook.fragment.XDFragment_;
+import net.comicbook.fragment.ZTFragment_;
 import net.comicbook.initview.SlidingMenuView;
 import net.comicbook.utils.BaseTools;
 import net.comicbook.view.LeftView;
@@ -23,7 +33,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import cn.bmob.v3.Bmob;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -38,6 +47,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cn.bmob.v3.Bmob;
 
 @EActivity(R.layout.main)
 public class MainActivity extends BaseActivity {
@@ -243,77 +253,31 @@ public class MainActivity extends BaseActivity {
     }
 
     public Fragment initFragment(String channelName) {
-        if (channelName.equals("头条")) {
+        if (channelName.equals("经典")) {
             newfragment = new JDFragment_();
-        } else if (channelName.equals("足球")) {
-//            newfragment = new FoodBallFragment_();
-        	newfragment = new NewsFragment_();
-        }/* else if (channelName.equals("娱乐")) {
-//            newfragment = new YuLeFragment_();
-        	newfragment = new NewsFragment_();
-        } else if (channelName.equals("体育")) {
-//            newfragment = new TiYuFragment_();
-        	newfragment = new NewsFragment_();
-        } else if (channelName.equals("财经")) {
-//            newfragment = new CaiJingFragment_();
-        	newfragment = new NewsFragment_();
-        } else if (channelName.equals("科技")) {
-//            newfragment = new KeJiFragment_();
-        	newfragment = new NewsFragment_();
-        } else if (channelName.equals("电影")) {
-//            newfragment = new DianYingFragment_();
-        	newfragment = new NewsFragment_();
-        }*/ /*else if (channelName.equals("汽车")) {
-            newfragment = new QiCheFragment_();
-        } else if (channelName.equals("笑话")) {
-            newfragment = new XiaoHuaFragment_();
-        } else if (channelName.equals("时尚")) {
-            newfragment = new ShiShangFragment_();
-        } else if (channelName.equals("北京")) {
-            newfragment = new BeiJingFragment_();
-        } else if (channelName.equals("军事")) {
-            newfragment = new JunShiFragment_();
-        } else if (channelName.equals("房产")) {
-            newfragment = new FangChanFragment_();
-        } else if (channelName.equals("游戏")) {
-            newfragment = new YouXiFragment_();
-        } else if (channelName.equals("情感")) {
-            newfragment = new QinGanFragment_();
-        } else if (channelName.equals("精选")) {
-            newfragment = new JingXuanFragment_();
-        } else if (channelName.equals("电台")) {
-            newfragment = new DianTaiFragment_();
-        } else if (channelName.equals("图片")) {
-            newfragment = new TuPianFragment_();
-        } else if (channelName.equals("NBA")) {
-            newfragment = new NBAFragment_();
-        } else if (channelName.equals("数码")) {
-            newfragment = new ShuMaFragment_();
-        } else if (channelName.equals("移动")) {
-            newfragment = new YiDongFragment_();
-        } else if (channelName.equals("彩票")) {
-            newfragment = new CaiPiaoFragment_();
-        } else if (channelName.equals("教育")) {
-            newfragment = new JiaoYuFragment_();
-        } else if (channelName.equals("论坛")) {
-            newfragment = new LunTanFragment_();
-        } else if (channelName.equals("旅游")) {
-            newfragment = new LvYouFragment_();
-        } else if (channelName.equals("手机")) {
-            newfragment = new ShouJiFragment_();
-        } else if (channelName.equals("博客")) {
-            newfragment = new BoKeFragment_();
-        } else if (channelName.equals("社会")) {
-            newfragment = new SheHuiFragment_();
-        } else if (channelName.equals("家居")) {
-            newfragment = new JiaJuFragment_();
-        } else if (channelName.equals("暴雪")) {
-            newfragment = new BaoXueYouXiFragment_();
-        } else if (channelName.equals("亲子")) {
-            newfragment = new QinZiFragment_();
-        } else if (channelName.equals("CBA")) {
-            newfragment = new CBAFragment_();
-        }*/
+        } else if (channelName.equals("评书")) {
+        	newfragment = new PSFragment_();
+        } else if (channelName.equals("神话")) {
+        	newfragment = new SHFragment_();
+        } else if (channelName.equals("民间")) {
+        	newfragment = new MJFragment_();
+        } else if (channelName.equals("革命")) {
+        	newfragment = new GMFragment_();
+        } else if (channelName.equals("武侠")) {
+        	newfragment = new WXFragment_();
+        } else if (channelName.equals("外国")) {
+        	newfragment = new WGFragment_();
+        } else if (channelName.equals("侦探")) {
+        	newfragment = new ZTFragment_();
+        } else if (channelName.equals("人物")) {
+        	newfragment = new RWFragment_();
+        } else if (channelName.equals("儿童")) {
+        	newfragment = new ETFragment_();
+        } else if (channelName.equals("现代")) {
+        	newfragment = new XDFragment_();
+        } else if (channelName.equals("其他")) {
+        	newfragment = new QTFragment_();
+        }
         return newfragment;
     }
 

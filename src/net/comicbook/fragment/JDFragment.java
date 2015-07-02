@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.comicbook.R;
 import net.comicbook.activity.BaseActivity;
+import net.comicbook.activity.ComickDetailActivity;
 import net.comicbook.activity.WatchComickActivity_;
 import net.comicbook.adapter.CBAdapter;
 import net.comicbook.adapter.CardsAnimationAdapter;
@@ -29,6 +30,7 @@ import org.androidannotations.annotations.ViewById;
 import org.json.JSONArray;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -90,6 +92,7 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         AnimationAdapter animationAdapter = new CardsAnimationAdapter(newAdapter);
         animationAdapter.setAbsListView(mListView);
         mListView.setAdapter(animationAdapter);
+        newAdapter.clear();
         loadData(index);
 
         mListView.setOnBottomListener(new OnClickListener() {
@@ -172,15 +175,17 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @ItemClick(R.id.listview)
     protected void onItemClick(int position) {
         Album album = listsModles.get(position);
-        if(album != null && album.getImgs() != null && album.getImgs().size() > 0)
+        if(album != null)
         	enterDetailActivity(album);
     }
 
     public void enterDetailActivity(Album album) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("album", album);
-        Class<?> class1 = WatchComickActivity_.class;
-        ((BaseActivity) getActivity()).openActivity(class1,bundle, 0);
+        Class<?> class1 = ComickDetailActivity.class;
+//        ((BaseActivity) getActivity()).openActivity(class1,bundle, 0);
+        ((BaseActivity) getActivity()).showCustomToast("click");
+        getActivity().startActivity(new Intent(getActivity(), class1));
     }
 
     @Background
@@ -199,7 +204,9 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         
     	BmobQuery query = new BmobQuery("Album");
     	query.setLimit(10);
+    	query.addWhereEqualTo("type", 0);
     	query.order("-createdAt");
+    	query.addQueryKeys("objectId,name,cover,descri");
     	query.setSkip(record);
     	query.findObjects(getActivity(), new FindCallback() {
 			@Override
@@ -210,6 +217,11 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 			@Override
 			public void onSuccess(JSONArray result) {
 				LogUtils.i("test", "json:"+result.toString());
+				if(result.length() > 10){
+					mListView.setHasMore(true);
+				}else{
+					mListView.setHasMore(false);
+				}
 				getResult(result.toString());
 			}
 		});
@@ -226,12 +238,13 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         mProgressBar.setVisibility(View.GONE);
         swipeLayout.setRefreshing(false);
         List<Album> list = JSON.parseArray(result, Album.class);
+        LogUtils.i("comick", "list size:"+list.size());
         
-        if (index == 0 && list.size() >= 4) {
-            initSliderLayout(list);
-        } else {
+//        if (index == 0 && list.size() >= 4) {
+//            initSliderLayout(list);
+//        } else {
             newAdapter.appendList(list);
-        }
+//        }
         listsModles.addAll(list);
         mListView.onBottomComplete();
     }

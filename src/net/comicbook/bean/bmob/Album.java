@@ -10,7 +10,7 @@ public class Album extends BmobObject{
 	 */
 	private static final long serialVersionUID = 5945061805081921350L;
 	private String name;
-	// 0:经典jd 1:评书ps 2:神话sh 3：民间mj 4：革命gm 5：武侠wx 6：外国wg 7：侦探zt 8：任务rw 9：儿童et 10：现代xd 11：其他qt
+	// 0:经典jd 1:评书ps 2:神话sh 3：民间mj 4：革命gm 5：武侠wx 6：外国wg 7：侦探zt 8：人物rw 9：儿童et 10：现代xd 11：其他qt
 	private Integer type;
 	private List<String> imgs;
 	private String descri;
