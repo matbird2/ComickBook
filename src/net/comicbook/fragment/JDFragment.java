@@ -6,11 +6,9 @@ import java.util.List;
 
 import net.comicbook.R;
 import net.comicbook.activity.BaseActivity;
-import net.comicbook.activity.ComickDetailActivity;
-import net.comicbook.activity.WatchComickActivity_;
+import net.comicbook.activity.ComickDetailActivity_;
 import net.comicbook.adapter.CBAdapter;
 import net.comicbook.adapter.CardsAnimationAdapter;
-import net.comicbook.bean.NewModle;
 import net.comicbook.bean.bmob.Album;
 import net.comicbook.initview.InitView;
 import net.comicbook.utils.LogUtils;
@@ -65,6 +63,8 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     protected List<Album> listsModles;
     private int index = 0;
     private boolean isRefresh = false;
+    
+    private static final Integer REQUEST_TYPE = 0;
     
     @Override
     public void onAttach(Activity activity) {
@@ -182,10 +182,11 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     public void enterDetailActivity(Album album) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("album", album);
-        Class<?> class1 = ComickDetailActivity.class;
+        Class<?> class1 = ComickDetailActivity_.class;
 //        ((BaseActivity) getActivity()).openActivity(class1,bundle, 0);
-        ((BaseActivity) getActivity()).showCustomToast("click");
-        getActivity().startActivity(new Intent(getActivity(), class1));
+//        ((BaseActivity) getActivity()).showCustomToast("click");
+//        getActivity().startActivity(new Intent(getActivity(), class1));
+        ((BaseActivity) getActivity()).openActivity(class1,bundle, 0);
     }
 
     @Background
@@ -204,7 +205,7 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         
     	BmobQuery query = new BmobQuery("Album");
     	query.setLimit(10);
-    	query.addWhereEqualTo("type", 0);
+    	query.addWhereEqualTo("type", REQUEST_TYPE);
     	query.order("-createdAt");
     	query.addQueryKeys("objectId,name,cover,descri");
     	query.setSkip(record);
@@ -222,7 +223,9 @@ public class JDFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 				}else{
 					mListView.setHasMore(false);
 				}
-				getResult(result.toString());
+				if(REQUEST_TYPE == 0){
+					getResult(result.toString());
+				}
 			}
 		});
     }

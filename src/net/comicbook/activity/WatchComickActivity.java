@@ -216,7 +216,7 @@ public class WatchComickActivity extends BaseActivity{
 				mCurlView.setMargins(.1f, .1f, .1f, .1f);
 			}*/
 			mCurlView.setViewMode(CurlView.SHOW_ONE_PAGE);
-			mCurlView.setMargins(.05f, .01f, .05f, .01f);
+			mCurlView.setMargins(.02f, .01f, .01f, .01f);
 		}
 	}
 

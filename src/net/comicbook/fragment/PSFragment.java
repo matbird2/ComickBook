@@ -56,6 +56,8 @@ public class PSFragment extends BaseFragment implements
 	protected List<Album> listsModles;
 	private int index = 0;
 	private boolean isRefresh = false;
+	
+	private static final Integer REQUEST_TYPE = 1;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -137,7 +139,7 @@ public class PSFragment extends BaseFragment implements
 	void loadCBList(int record) {
 		BmobQuery query = new BmobQuery("Album");
 		query.setLimit(10);
-		query.addWhereEqualTo("type", 1);
+		query.addWhereEqualTo("type", REQUEST_TYPE);
 		query.order("-createdAt");
 		query.addQueryKeys("objectId,name,cover,descri");
 		query.setSkip(record);
@@ -156,7 +158,9 @@ public class PSFragment extends BaseFragment implements
 				} else {
 					mListView.setHasMore(false);
 				}
-				getResult(result.toString());
+				if(REQUEST_TYPE == 1){
+					getResult(result.toString());
+				}
 			}
 		});
 	}
