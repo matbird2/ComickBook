@@ -18,6 +18,13 @@ public class Album extends BmobObject{
 	private String remark;
 	private Double price;
 	private String cover;
+	private Long length;
+	public Long getLength() {
+		return length;
+	}
+	public void setLength(Long length) {
+		this.length = length;
+	}
 	public String getCover() {
 		return cover;
 	}

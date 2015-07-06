@@ -2,6 +2,7 @@ package net.comicbook.activity;
 
 import net.comicbook.R;
 import net.comicbook.bean.bmob.Album;
+import net.comicbook.utils.LogUtils;
 import net.comicbook.utils.Options;
 
 import org.androidannotations.annotations.AfterInject;
@@ -119,90 +120,47 @@ public class WatchComickActivity extends BaseActivity{
 		}
 
 		
-		public void updatePage(final CurlPage page, final int width, final int height,final int index) {
-
-			/*switch (index) {
-			// First case is image on front side, solid colored back.
-			case 0: {
-				Bitmap front = loadBitmap(width, height, 0);
-				page.setTexture(front, CurlPage.SIDE_FRONT);
-				page.setColor(Color.rgb(180, 180, 180), CurlPage.SIDE_BACK);
-				break;
-			}
-			// Second case is image on back side, solid colored front.
-			case 1: {
-				Bitmap back = loadBitmap(width, height, 2);
-				page.setTexture(back, CurlPage.SIDE_BACK);
-				page.setColor(Color.rgb(127, 140, 180), CurlPage.SIDE_FRONT);
-				break;
-			}
-			// Third case is images on both sides.
-			case 2: {
-				Bitmap front = loadBitmap(width, height, 1);
-				Bitmap back = loadBitmap(width, height, 3);
-				page.setTexture(front, CurlPage.SIDE_FRONT);
-				page.setTexture(back, CurlPage.SIDE_BACK);
-				break;
-			}
-			// Fourth case is images on both sides - plus they are blend against
-			// separate colors.
-			case 3: {
-				Bitmap front = loadBitmap(width, height, 2);
-				Bitmap back = loadBitmap(width, height, 1);
-				page.setTexture(front, CurlPage.SIDE_FRONT);
-				page.setTexture(back, CurlPage.SIDE_BACK);
-				page.setColor(Color.argb(127, 170, 130, 255),
-						CurlPage.SIDE_FRONT);
-				page.setColor(Color.rgb(255, 190, 150), CurlPage.SIDE_BACK);
-				break;
-			}
-			// Fifth case is same image is assigned to front and back. In this
-			// scenario only one texture is used and shared for both sides.
-			case 4:
-				Bitmap front = loadBitmap(width, height, 0);
-				page.setTexture(front, CurlPage.SIDE_BOTH);
-				page.setColor(Color.argb(127, 255, 255, 255),
-						CurlPage.SIDE_BACK);
-				break;
-			}*/
-			
-			/*Bitmap front = loadBitmap(width, height, index);
-			page.setTexture(front, CurlPage.SIDE_BOTH);*/
-			
-//			ImageSize targetImageSize = new ImageSize(width, height);
-//			imageLoader.loadImageSync(album.getImgs().get(index), targetImageSize);
-			imageLoader.loadImage(album.getImgs().get(index),  options, new SimpleImageLoadingListener(){
-				@Override
-				public void onLoadingComplete(String imageUri, View view,
-						Bitmap loadedImage) {
-					super.onLoadingComplete(imageUri, view, loadedImage);
-					dismissProgressDialog();
-					
-					if(loadedImage != null && !loadedImage.isRecycled())
-						page.setTexture(loadedImage, CurlPage.SIDE_BOTH);
-				}
-				@Override
-				public void onLoadingFailed(String imageUri, View view,
-						FailReason failReason) {
-					super.onLoadingFailed(imageUri, view, failReason);
-					dismissProgressDialog();
-					
-					Bitmap loadingBitmap = loadBitmap(width, height, 1);
-					page.setTexture(loadingBitmap, CurlPage.SIDE_BOTH);
-				}
-				@Override
-				public void onLoadingStarted(String imageUri, View view) {
-					super.onLoadingStarted(imageUri, view);
-					showProgressDialog();
-					
-					Bitmap loadingBitmap = loadBitmap(width, height, 0);
-					page.setTexture(loadingBitmap, CurlPage.SIDE_BOTH);
-				}
-			});
-		}
-
+	public void updatePage(final CurlPage page, final int width, final int height,final int index) {
+			loadImageAndSetTexture(page, width, height, index);
 	}
 
+	private void loadImageAndSetTexture(final CurlPage page, final int width, final int height,final int index){
+			imageLoader.loadImage(album.getImgs().get(index), options,
+					new SimpleImageLoadingListener() {
+						@Override
+						public void onLoadingComplete(String imageUri,
+								View view, Bitmap loadedImage) {
+							super.onLoadingComplete(imageUri, view, loadedImage);
+
+							if (loadedImage != null&& !loadedImage.isRecycled()){
+								page.setTexture(loadedImage, CurlPage.SIDE_BOTH);
+								LogUtils.i("comick", "setTexture.");
+							}
+							
+							if(index < (album.getImgs().size() -1)){
+								imageLoader.loadImage(album.getImgs().get(index+1), options, null);
+							}
+						}
+
+						@Override
+						public void onLoadingFailed(String imageUri, View view,
+								FailReason failReason) {
+							super.onLoadingFailed(imageUri, view, failReason);
+
+							Bitmap loadingBitmap = loadBitmap(width, height, 1);
+							page.setTexture(loadingBitmap, CurlPage.SIDE_BOTH);
+						}
+
+						@Override
+						public void onLoadingStarted(String imageUri, View view) {
+							super.onLoadingStarted(imageUri, view);
+
+							Bitmap loadingBitmap = loadBitmap(width, height, 0);
+							page.setTexture(loadingBitmap, CurlPage.SIDE_BOTH);
+						}
+					});
+		}
+	}
 	/**
 	 * CurlView size changed observer.
 	 */

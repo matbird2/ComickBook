@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.comicbook.R;
 import net.comicbook.activity.BaseActivity;
+import net.comicbook.activity.ComickDetailActivity_;
 import net.comicbook.activity.WatchComickActivity_;
 import net.comicbook.adapter.CBAdapter;
 import net.comicbook.adapter.CardsAnimationAdapter;
@@ -117,13 +118,15 @@ public class WGFragment extends BaseFragment implements
 
 	@ItemClick(R.id.listview)
 	protected void onItemClick(int position) {
-		
+		Album album = listsModles.get(position);
+		if (album != null)
+			enterDetailActivity(album);
 	}
 
 	public void enterDetailActivity(Album album) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("album", album);
-		Class<?> class1 = WatchComickActivity_.class;
+		Class<?> class1 = ComickDetailActivity_.class;
 		((BaseActivity) getActivity()).openActivity(class1, bundle, 0);
 	}
 

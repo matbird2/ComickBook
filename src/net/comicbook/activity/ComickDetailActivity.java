@@ -40,6 +40,8 @@ public class ComickDetailActivity extends BaseActivity{
 	protected TextView descri;
 	@ViewById(R.id.remark)
 	protected TextView remark;
+	@ViewById(R.id.length)
+	protected TextView length;
 	
 	private Album album;
 	
@@ -77,6 +79,7 @@ public class ComickDetailActivity extends BaseActivity{
 		type.setText(album.getType() == null ? "--" : TYPES[album.getType()]);
 		descri.setText(album.getDescri() == null ? "--":album.getDescri());
 		remark.setText(album.getRemark() == null ? "--" : album.getRemark());
+		length.setText(album.getLength() == null ? "--M" : (album.getLength() / 1024 / 1024)+"M");
 		imageLoader.displayImage(album.getCover(), image, options);
 	}
 	
