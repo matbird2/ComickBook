@@ -2,7 +2,7 @@
 <resources>
     <color name="activity_bg_color">#fff5f5f5</color>
     <color name="white">#ffffffff</color>
-    <color name="main_red">#ffcc3131</color>
+    <color name="main_red">#FF1E90FF</color>
     <color name="gray">#ff808080</color>
     <color name="list_divider">#f1f1e8</color>
     <color name="drop_down_list_footer_font_color">#A2A3A2</color>

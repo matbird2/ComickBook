@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dip"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
+        android:background="@drawable/bg_gray_remark"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="账号"
+                android:textSize="15sp"
+                android:textColor="#aa343539" />
+
+            <ImageView
+                android:layout_width="0dip"
+                android:layout_height="24dip"
+                android:layout_weight="0.01"
+                android:background="#c6c6c6" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_weight="3"
+                android:background="@null"
+                android:inputType="number"
+                android:hint="请输入11位手机号"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="#c6c6c6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="密码" 
+                android:textSize="15sp"
+                android:textColor="#aa343539"/>
+
+            <ImageView
+                android:layout_width="0dip"
+                android:layout_height="24dip"
+                android:layout_weight="0.01"
+                android:background="#c6c6c6" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_weight="3"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:hint="密码长度不小于6位"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="#c6c6c6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="确认" 
+                android:textSize="15sp"
+                android:textColor="#aa343539"/>
+
+            <ImageView
+                android:layout_width="0dip"
+                android:layout_height="24dip"
+                android:layout_weight="0.01"
+                android:background="#c6c6c6" />
+
+            <EditText
+                android:id="@+id/confirm"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_weight="3"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:hint="请确认密码"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

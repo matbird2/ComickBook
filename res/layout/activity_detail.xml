@@ -42,7 +42,7 @@
                     android:layout_marginRight="8dip"
                     android:text="0.00M"
                     android:textColor="#6c6c6c"
-                    android:textSize="12dip" />
+                    android:textSize="15dip" />
 
                 <TextView
                     android:id="@+id/download"
@@ -52,7 +52,7 @@
                     android:layout_toLeftOf="@id/length"
                     android:text="下载"
                     android:textColor="#FF1E90FF"
-                    android:textSize="12dip" />
+                    android:textSize="15dip" />
             </RelativeLayout>
 
             <TextView
@@ -83,6 +83,15 @@
                     android:textSize="10sp" />
 
                 <TextView
+                    android:id="@+id/page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dip"
+                    android:text="122页"
+                    android:textColor="#6c6c6c"
+                    android:textSize="10dip" />
+                <TextView
                     android:id="@+id/type"
                     android:layout_width="25dip"
                     android:layout_height="17dip"
@@ -98,7 +107,9 @@
                 android:id="@+id/descri"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dip"
+                android:layout_margin="8dip"
+                android:background="@drawable/bg_gray_remark"
+                android:padding="5dip"
                 android:text="content"
                 android:textColor="#6c6c6c"
                 android:textSize="15dip" />
@@ -141,7 +152,7 @@
                 android:textColor="#FF1E90FF"
                 android:textSize="12dip" />
         </LinearLayout>
-
+        
         <ImageView
             android:id="@+id/back"
             android:layout_width="30dip"

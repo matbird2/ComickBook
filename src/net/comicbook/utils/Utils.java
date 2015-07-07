@@ -7,8 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -610,5 +613,36 @@ public class Utils {
 			}
 		}
 		return tmp.toString();
+	}
+	
+	/**
+	 * MD5加密字符串
+	 * @param source
+	 * @return
+	 */
+	public static String encryptWithMD5(String source){
+		
+		String algorithm = "";
+        if (source == null) {
+            return "null";
+        }
+        try {
+            algorithm = System.getProperty("MD5.algorithm", "MD5");
+        } catch (SecurityException se) {
+        }
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance(algorithm);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte buffer[] = source.getBytes();
+
+        for (int count = 0; count < source.length(); count++) {
+            md.update(buffer, 0, count);
+        }
+        byte bDigest[] = md.digest();
+        BigInteger bi = new BigInteger(bDigest);
+        return (bi.toString(16));
 	}
 }

@@ -50,6 +50,7 @@
         android:layout_centerVertical="true"
         android:gravity="center"
         android:scaleType="centerInside"
+        android:layout_marginRight="8dip"
         android:visibility="gone"
         android:src="@drawable/right_drawer" />
 
