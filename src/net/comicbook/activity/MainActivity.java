@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity {
     private void initViewPager() {
         mAdapetr = new NewsFragmentPagerAdapter(
                 getSupportFragmentManager());
-        mViewPager.setOffscreenPageLimit(1);
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAdapetr);
         mViewPager.setOnPageChangeListener(pageListener);
     }
